@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BeginStoryboard x:Key="beginStoryBoardListBox">
+        <Storyboard>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="listBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="170"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="listBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="260"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </BeginStoryboard>
+    <BeginStoryboard x:Key="beginSBListBoxHide">
+        <Storyboard>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="listBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="listBox">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.20" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </BeginStoryboard>
+    
+    <BeginStoryboard x:Key="beginSBLeftMenu">
+        <Storyboard>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="LeftMenu">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="250"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </BeginStoryboard>
+    <BeginStoryboard x:Key="beginSBLeftMenuHide">
+        <Storyboard>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="LeftMenu">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </BeginStoryboard>
+</ResourceDictionary>

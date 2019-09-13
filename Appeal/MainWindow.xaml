@@ -5,62 +5,180 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Appeal"
         mc:Ignorable="d"
-        Title="Appeal" Height="450" Width="800" MinHeight="400" MinWidth="200">
+        Title="Appeal" Height="550" Width="900" MinHeight="400" MinWidth="200">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="TemplateResources/TextBoxUI.xaml"/>
+                <ResourceDictionary Source="TemplateResources/ChatUI.xaml"/>
+                <ResourceDictionary Source="TemplateResources/AnimationUI.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Background="#FF0E1621">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="150" Width="1*"/>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition MinWidth="300" Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <GridSplitter Grid.Column="1" Width="2" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-        <Grid Grid.Column="0" Background="#FF17212B">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Button  x:Name="btnMenu" Width="15" Height="15" BorderThickness="0" Margin="10,5,5,5" HorizontalAlignment="Left">
-                <Button.Background>
-                    <ImageBrush ImageSource="./icons/menu.png"/>
-                </Button.Background>
-            </Button>
-            <TextBox Name="tbSearch" Margin="35,5,5,5" BorderThickness="1" Style="{StaticResource NewTextBox}"/>
+    <Grid>
+        <Grid Background="#FF0E1621">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="250" Width="0.8*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition MinWidth="300" Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" Width="2" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+            <Grid Grid.Column="0" Background="#FF17212B">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button  x:Name="btnMenu" Margin="10,5,5,5" HorizontalAlignment="Left"
+                         Style="{StaticResource ChatMenuUIStyle}" Click="BtnMenu_Click">
+                    <Image Source="icons/menu.png" Width="15" Height="15"/>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <StaticResource ResourceKey="beginSBLeftMenu"/>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <TextBox x:Name="tbSearch" Margin="35,5,5,5" BorderThickness="1" Style="{StaticResource NewTextBox}"/>
+                <ListBox x:Name="listUserChanels" Grid.Row="1" Background="Transparent" BorderThickness="0"/>
+                <StackPanel Name="spChanels" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+                    <local:btnChanelControl x:Name="btnSt"/>
+                    <local:btnChanelControl x:Name="btnSt1"/>
+                    <local:btnChanelControl x:Name="btnSt2"/>
+                    <local:btnChanelControl x:Name="btnSt3"/>
+                    <local:btnChanelControl x:Name="btnSt4"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <DockPanel Grid.Row="0" Background="#FF17212B">
+                        <StackPanel Orientation="Vertical" Width="Auto" DockPanel.Dock="Left">
+                            <TextBlock x:Name="tbNameChatUser" Text="tbNameChatUser" Foreground="White" FontWeight="Bold" Margin="5,2,5,0" FontSize="14"/>
+                            <TextBlock x:Name="tbCHatUserActivity" Text="Online" Foreground="#FF7272FC" Margin="5,0,5,5"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                            <Button x:Name="btnPhoneCall" Margin="5" Style="{StaticResource ChatMenuUIStyle}">
+                                <Image Source="phone-call.png" Width="15" Height="15"/>
+                            </Button>
+                            <Button  x:Name="btnSearch" Margin="5" Style="{StaticResource ChatMenuUIStyle}">
+                                <Image Source="icons/search.png" Width="15" Height="15"/>
+                            </Button>
+                            <Button  x:Name="btnChatMenu" Margin="5" Style="{StaticResource ChatMenuUIStyle}" Click="BtnChatMenu_Click">
+                                <Image Source="icons\menu dot.png" Width="15" Height="15"/>
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <StaticResource ResourceKey="beginStoryBoardListBox"/>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel x:Name="listBox" Width="0" Height="0" Background="#FF17212B" Grid.Row="1"
+                     VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Visible">
+                    <StackPanel.Triggers>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <StaticResource ResourceKey="beginSBListBoxHide"/>
+                        </EventTrigger>
+                    </StackPanel.Triggers>
+                    <Button Style="{StaticResource LeftMenuUIStyle}" >
+                        <TextBlock Text="View profile" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Disable notifications" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Share contact" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Edit contact" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Delete contact" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Export chat history" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Delete conversation" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Clear history" Margin="20,5,5,5"/>
+                    </Button>
+                    <Button Style="{StaticResource LeftMenuUIStyle}">
+                        <TextBlock Text="Block user" Margin="20,5,5,5"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
-        <Grid Grid.Column="2">
+        <Grid Name="bgShadow" Background="Black" Opacity="0.4" Visibility="Hidden"
+              MouseLeftButtonDown="LeftMenu_MouseLeftButtonDown">
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="Control.MouseLeftButtonDown">
+                    <StaticResource ResourceKey="beginSBLeftMenuHide"/>
+                </EventTrigger>
+            </Grid.Triggers>
+        </Grid>
+        <Grid Name="LeftMenu" Background="#FF17212B"
+              Width="0" HorizontalAlignment="Left" VerticalAlignment="Stretch" d:IsHidden="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
-            <DockPanel Grid.Row="0" Background="#FF17212B">
-                <StackPanel Orientation="Vertical" Width="Auto" DockPanel.Dock="Left">
-                    <TextBlock x:Name="tbUsername" Text="Name" Foreground="White" FontWeight="Bold" Margin="5,2,5,0" FontSize="14"/>
-                    <TextBlock x:Name="tbUserActivity" Text="Online" Foreground="#FF7272FC" Margin="5,0,5,5"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
-                    <Button  x:Name="btnPhoneCall" Width="15" Height="15" BorderThickness="0" Margin="5">
-                        <Button.Background>
-                            <ImageBrush ImageSource="./icons/phone-call.png"/>
-                        </Button.Background>
-                    </Button>
-                    <Button  x:Name="btnSearch" Width="15" Height="15" BorderThickness="0" Margin="5">
-                        <Button.Background>
-                            <ImageBrush ImageSource="./icons/search.png"/>
-                        </Button.Background>
-                    </Button>
-                    <Button  x:Name="btnChatMenu" Width="15" Height="15" BorderThickness="0" Margin="5">
-                        <Button.Background>
-                            <ImageBrush ImageSource="./icons/menu dot.png"/>
-                        </Button.Background>
-                    </Button>
-                </StackPanel>
-            </DockPanel>
-            
+            <StackPanel Grid.Row="0" Background="#FF276899">
+                <Image Width="35" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top"
+                       Margin="20,15,0,0" Name="imgUserAvatar"/>
+                <TextBlock Name="tbUserName" Text="Name" Margin="20,5,5,5"
+                           Foreground="White" FontWeight="Bold" FontSize="14"/>
+                <TextBlock Name="tbUserPN" Text="+380 00 000 00 00" Margin="20,0,0,0"
+                           Foreground="White"/>
+            </StackPanel>
+
+            <StackPanel x:Name="LeftManuPanel" Grid.Row="1"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button Style="{StaticResource LeftMenuUIStyle}">
+                    <StackPanel Orientation="Horizontal" Margin="20,5,5,5">
+                        <Image Source="icons\users.png" Margin="5"/>
+                        <TextBlock Text="New Group" Margin="10"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource LeftMenuUIStyle}">
+                    <StackPanel Orientation="Horizontal" Margin="20,5,5,5">
+                        <Image Source="icons\megaphone.png" Margin="5"/>
+                        <TextBlock Text="New Channel" Margin="10"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource LeftMenuUIStyle}">
+                    <StackPanel Orientation="Horizontal" Margin="20,5,5,5">
+                        <Image Source="icons\avatar.png" Margin="5"/>
+                        <TextBlock Text="Contacts" Margin="10"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource LeftMenuUIStyle}">
+                    <StackPanel Orientation="Horizontal" Margin="20,5,5,5">
+                        <Image Source="icons\phone-call.png" Margin="5"/>
+                        <TextBlock Text="Calls" Margin="10"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource LeftMenuUIStyle}">
+                    <StackPanel Orientation="Horizontal" Margin="20,5,5,5">
+                        <Image Source="icons\settings.png" Margin="5"/>
+                        <TextBlock Text="Settings" Margin="10"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <TextBlock Text="Appeal" Foreground="#FF708488"
+                       Grid.Row="2" Style="{StaticResource tbAbout}" FontWeight="Bold"
+                       HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,5,0,0"/>
+            <StackPanel Orientation="Horizontal"  Grid.Row="2" Margin="20,0,0,10"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <TextBlock Text="Version 0.0.00001" Style="{StaticResource tbAbout}"/>
+            <TextBlock Text=" - " Foreground="#FF708488"/>
+            <TextBlock Text="About" Style="{StaticResource tbAbout}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

@@ -24,5 +24,19 @@ namespace Appeal
         {
             InitializeComponent();
         }
+
+        private void BtnChatMenu_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void BtnMenu_Click(object sender, RoutedEventArgs e)
+        {
+            bgShadow.Visibility = Visibility.Visible;
+        }
+
+        private void LeftMenu_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+           (sender as Grid).Visibility = Visibility.Hidden;
+        }
     }
 }
